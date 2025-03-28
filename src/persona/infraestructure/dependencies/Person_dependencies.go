@@ -39,3 +39,12 @@ func GetCreatePersonController() *controllers.IaddPersonController {
 	caseCreatePerson := application.NewIaddPerson(&mySQL) // Asegurar que NewIaddPerson devuelva un puntero a la estructura correcta
 	return controllers.NewIaddPersonController(caseCreatePerson)
 }
+func GetNewPersonIsAddedController()*controllers.GetNewPersonIsAddedController{
+	useCase := application.NewGetNewPersonIsAddedUc(&mySQL)
+	return controllers.NewGetNewPersonIsAddedController(useCase)
+}
+
+func GetCountGenderController()*controllers.CountGenderController{
+	useCase := application.NewCountGenderUc(&mySQL)
+	return controllers.NewCountGenderUc(useCase)
+}
