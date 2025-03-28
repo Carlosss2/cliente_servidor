@@ -14,7 +14,7 @@ func NewMySQL(db *sql.DB) *MySQL {
 	return &MySQL{DB: db}
 }
 
-func (mysql *MySQL) Save(persona domain.Persona) error {
+func (mysql *MySQL) AddPerson(persona domain.Persona) error {
 	_, err := mysql.DB.Exec(
 		"INSERT INTO persona (edad, nombre, sexo) VALUES (?, ?, ?)", 
 		persona.Edad, persona.Nombre, persona.Sexo,
