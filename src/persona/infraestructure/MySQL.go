@@ -35,11 +35,18 @@ func (sql *MySQL)GetnewPersonIsAdded() (bool, error){
 	}
 
 	if count > sql.lastCount {
-		// Si el conteo actual es mayor que el anterior, significa que se ha agregado una persona
-		// Actualizamos lastCount para mantener el conteo más reciente
 		sql.lastCount = count
 		return true, nil
 	}
 
 	return false, nil
+}
+
+func (sql *MySQL) CountGender(sexo bool) (int, error) {
+	var count int
+	err := sql.DB.QueryRow("SELECT COUNT(*) FROM personas WHERE sexo = ?", sexo).Scan(&count)
+	if err != nil {
+		return 0, fmt.Errorf("error obteniendo el conteo de personas de sexo %v: %v", sexo, err)
+	}
+	return count, nil
 }

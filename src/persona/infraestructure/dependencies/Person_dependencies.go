@@ -43,3 +43,8 @@ func GetNewPersonIsAddedController()*controllers.GetNewPersonIsAddedController{
 	useCase := application.NewGetNewPersonIsAddedUc(&mySQL)
 	return controllers.NewGetNewPersonIsAddedController(useCase)
 }
+
+func GetCountGenderController()*controllers.CountGenderController{
+	useCase := application.NewCountGenderUc(&mySQL)
+	return controllers.NewCountGenderUc(useCase)
+}
