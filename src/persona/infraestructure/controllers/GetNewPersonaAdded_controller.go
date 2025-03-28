@@ -27,9 +27,6 @@ func (controller *GetNewPersonIsAddedController) Execute(c *gin.Context) {
 		return
 	}
 
-	// Establecer el encabezado de respuesta
-	c.Header("Content-Type", "application/json")
-
 	
 	ctx, cancel := context.WithTimeout(c.Request.Context(), 5*time.Second)
 	defer cancel()
