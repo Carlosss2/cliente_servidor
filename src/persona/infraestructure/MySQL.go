@@ -8,6 +8,7 @@ import (
 
 type MySQL struct {
 	DB *sql.DB
+	lastCount int
 }
 
 func NewMySQL(db *sql.DB) *MySQL {
@@ -23,4 +24,22 @@ func (mysql *MySQL) AddPerson(persona domain.Persona) error {
 		return fmt.Errorf("[MySQL] Error al guardar la persona: %w", err)
 	}
 	return nil
+}
+
+func (sql *MySQL)GetnewPersonIsAdded() (bool, error){
+
+	var count int
+	err := sql.DB.QueryRow("SELECT COUNT(*) FROM personas").Scan(&count)
+	if err != nil {
+		return false, fmt.Errorf("error obteniendo el conteo de personas: %v", err)
+	}
+
+	if count > sql.lastCount {
+		// Si el conteo actual es mayor que el anterior, significa que se ha agregado una persona
+		// Actualizamos lastCount para mantener el conteo más reciente
+		sql.lastCount = count
+		return true, nil
+	}
+
+	return false, nil
 }
