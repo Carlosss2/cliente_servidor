@@ -30,8 +30,8 @@ func (controller *GetNewPersonIsAddedController) Execute(c *gin.Context) {
 	// Establecer el encabezado de respuesta
 	c.Header("Content-Type", "application/json")
 
-	// Crear un contexto con timeout de 10 segundos
-	ctx, cancel := context.WithTimeout(c.Request.Context(), 10*time.Second)
+	
+	ctx, cancel := context.WithTimeout(c.Request.Context(), 5*time.Second)
 	defer cancel()
 
 	// Crear un ticker para verificar cada segundo
